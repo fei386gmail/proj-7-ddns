@@ -1,9 +1,11 @@
 package com.example.dictionary.control;
 
+import com.example.dictionary.entity.IP_CF;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Maps;
-import org.apache.commons.exec.util.StringUtils;
+
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +17,38 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.String.*;
-import org.apache.commons.*;
-import top.jfunc.common.utils.StrUtil;
 
 @Component
-public class DetectIP {
-
+public class DetectIP implements Runnable{
+    @Autowired
+    private IP_CF ipCf;
+    @Autowired
+    private SendEmail sendEmail;
     @PostConstruct
     public void getIP()
     {
-        System.out.println(DetectIP.getV4IP());
+      new Thread(this).start();
     }
-
+    @SneakyThrows
+    @Override
+    public void run() {
+        while (true)
+        {
+            String ip=DetectIP.getV4IP();
+            System.out.println(ip);
+            if(!ipCf.getIp().equals(ip))
+            {
+                ipCf.setIp(ip);
+                sendEmail.sendEmail(ip);
+            }
+            Thread.sleep(3601020);
+        }
+    }
 
     /**
      *@Function
@@ -72,8 +90,8 @@ public class DetectIP {
      * @return
      */
     public static Map<String, Object> json2Map(String json){
-        Map map = Maps.newHashMap();
-
+//        Map map = Maps.newHashMap();
+        Map map=new HashMap();
         try {
             map = objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {});
         } catch (IOException e) {
@@ -82,6 +100,7 @@ public class DetectIP {
 
         return map;
     }
+
 
 
 }
