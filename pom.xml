@@ -29,18 +29,29 @@
             <artifactId>xjar</artifactId>
             <version>4.0.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 
+        <!-- https://mvnrepository.com/artifact/top.jfunc.common/common-utils -->
+        <dependency>
+            <groupId>top.jfunc.common</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <!--  web spider -->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>3.141.59</version>
-        </dependency>
+
+
         <!--  apache /commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -53,11 +64,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,12 +85,12 @@
 <!--            <version>2.5.2</version>-->
         </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.5.4.Final</version>
-        </dependency>
 
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
 
 
     </dependencies>
